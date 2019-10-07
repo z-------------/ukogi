@@ -11,5 +11,8 @@
   "license": "MIT",
   "devDependencies": {
     "jsdoc-to-markdown": "^5.0.1"
+  },
+  "dependencies": {
+    "uuid": "^3.3.3"
   }
 }

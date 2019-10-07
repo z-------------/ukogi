@@ -1,3 +1,5 @@
+const uuid = require("uuid/v4");
+
 const isRenderer = (process && process.type === "renderer");
 const ipc = require("electron")[isRenderer ? "ipcRenderer" : "ipcMain"];
 
