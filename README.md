@@ -18,7 +18,7 @@ A wrapper for Electron IPC for both main and renderer processes.
 ## on(channel, callback)
 Register a handler for an IPC channel
 
-**Kind**: global function  
+**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -30,11 +30,10 @@ Register a handler for an IPC channel
 ## send(channel, arg, callback)
 Send a message through an IPC channel and receive the response
 
-**Kind**: global function  
+**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
 | channel | <code>string</code> | Name of the channel |
-| arg | <code>\*</code> | Arguments to pass |
+| arg | <code>\*</code> | Argument to pass |
 | callback | <code>function</code> | Called with arguments (event, arg) |
-

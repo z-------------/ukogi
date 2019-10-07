@@ -9,10 +9,10 @@
   "repository": "https://github.com/z-------------/ukogi",
   "author": "Zack Guard <zacharyguard@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "jsdoc-to-markdown": "^5.0.1"
-  },
   "dependencies": {
     "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "jsdoc-to-markdown": "^5.0.1"
   }
 }
