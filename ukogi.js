@@ -3,6 +3,8 @@ const uuid = require("uuid/v4");
 const isRenderer = (process && process.type === "renderer");
 const ipc = require("electron")[isRenderer ? "ipcRenderer" : "ipcMain"];
 
+const REPLY_CHANNEL_SUFFIX = "__UKOGI-REPLY__";
+
 let attached = [];
 let listeners = {};
 
@@ -14,7 +16,7 @@ let listeners = {};
 const on = (channel, callback) => {
   ipc.on(channel, (e, arg) => {
     callback(e, arg, (replyArg) => {
-      e.reply(channel + "-reply", {
+      e.reply(channel + REPLY_CHANNEL_SUFFIX, {
         _transactionUUID: arg._transactionUUID,
         arg: replyArg
       });
@@ -31,7 +33,7 @@ const on = (channel, callback) => {
 const send = (channel, arg, callback) => {
   const id = uuid();
   if (attached.indexOf(channel) === -1) {
-    ipc.on(channel + "-reply", (e, arg) => {
+    ipc.on(channel + REPLY_CHANNEL_SUFFIX, (e, arg) => {
       const listener = listeners[arg._transactionUUID];
       if (listener) {
         listener(e, arg.arg);
