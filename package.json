@@ -1,0 +1,15 @@
+{
+  "name": "ukogi",
+  "version": "0.0.0",
+  "description": "A wrapper for Electron IPC for both main and renderer processes",
+  "main": "ukogi.js",
+  "scripts": {
+    "doc": "jsdoc2md ukogi.js"
+  },
+  "repository": "https://github.com/z-------------/ukogi",
+  "author": "Zack Guard <zacharyguard@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "jsdoc-to-markdown": "^5.0.1"
+  }
+}
