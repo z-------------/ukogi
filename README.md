@@ -18,22 +18,27 @@ A wrapper for Electron IPC for both main and renderer processes.
 ## on(channel, callback)
 Register a handler for an IPC channel
 
-**Kind**: global function
+**Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | channel | <code>string</code> | Name of the channel |
-| callback | <code>function</code> | Called with arguments (event, arg, reply) |
+| callback | <code>function</code> | Callback to run when a message is received on this channel, called with arguments (event, arg, reply). Arguments passed to reply(arg) will be received by the callback in the corresponding `ukogi.send` call. |
 
 <a name="send"></a>
 
 ## send(channel, arg, callback)
 Send a message through an IPC channel and receive the response
 
-**Kind**: global function
+**Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | channel | <code>string</code> | Name of the channel |
 | arg | <code>\*</code> | Argument to pass |
-| callback | <code>function</code> | Called with arguments (event, arg) |
+| callback | <code>function</code> | Callback to run when a reply is received on this channel, called with arguments (event, arg). Arguments passed to the corresponding `ukogi.on` call's reply(arg) will be received here. |
+
+
+## License
+
+MIT License

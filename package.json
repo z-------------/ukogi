@@ -4,7 +4,7 @@
   "description": "A wrapper for Electron IPC for both main and renderer processes",
   "main": "ukogi.js",
   "scripts": {
-    "doc": "jsdoc2md ukogi.js"
+    "doc": "jsdoc2md ukogi.js --template jsdoc2md/README.hbs --files ukogi.js > README.md"
   },
   "repository": "https://github.com/z-------------/ukogi",
   "author": "Zack Guard <zacharyguard@gmail.com>",
