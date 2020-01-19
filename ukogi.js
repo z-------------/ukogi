@@ -22,10 +22,15 @@ const listeners = {};
 const on = (channel, callback) => {
   ipc.on(channel, (e, arg) => {
     callback(e, arg, (replyArg) => {
-      e.reply(channel + REPLY_CHANNEL_SUFFIX, {
+      const replyArgs = [channel + REPLY_CHANNEL_SUFFIX, {
         _transactionUUID: arg._transactionUUID,
         arg: replyArg
-      });
+      }];
+      if (isRenderer) {
+        ipc.send(...replyArgs);
+      } else {
+        e.reply(...replyArgs);
+      }
     });
   });
 };
