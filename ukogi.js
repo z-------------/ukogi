@@ -1,12 +1,14 @@
 const uuid = require("uuid/v4");
+const isRenderer = require("is-electron-renderer");
 
-const isRenderer = (process && process.type === "renderer");
-const ipc = require("electron")[isRenderer ? "ipcRenderer" : "ipcMain"];
+const electron = require("electron");
+const ipc = electron[isRenderer ? "ipcRenderer" : "ipcMain"];
+const { BrowserWindow } = electron;
 
 const REPLY_CHANNEL_SUFFIX = "__UKOGI-REPLY__";
 
-let attached = [];
-let listeners = {};
+const attached = [];
+const listeners = {};
 
 /**
  * Register a handler for an IPC channel
@@ -48,7 +50,17 @@ const send = (channel, arg, callback) => {
     });
     attached.push(channel);
   }
-  ipc.send(channel, { _transactionUUID: id, arg });
+
+  const sendArgs = [channel, { _transactionUUID: id, arg }];
+  if (isRenderer) {
+    ipc.send(...sendArgs);
+  } else {
+    const windows = BrowserWindow.getAllWindows();
+    for (const win of windows) {
+      win.webContents.send(...sendArgs);
+    }
+  }
+
   listeners[id] = callback;
 };
 

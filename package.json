@@ -1,6 +1,6 @@
 {
   "name": "ukogi",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A wrapper for Electron IPC for both main and renderer processes",
   "main": "ukogi.js",
   "scripts": {
@@ -10,9 +10,11 @@
   "author": "Zack Guard <zacharyguard@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "is-electron-renderer": "^2.0.1",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "electron": "*",
     "jsdoc-to-markdown": "^5.0.1"
   }
 }
