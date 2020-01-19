@@ -21,10 +21,10 @@ const listeners = {};
  */
 const on = (channel, callback) => {
   ipc.on(channel, (e, arg) => {
-    callback(e, arg, (replyArg) => {
+    callback(e, arg.data, (replyArg) => {
       const replyArgs = [channel + REPLY_CHANNEL_SUFFIX, {
         _transactionUUID: arg._transactionUUID,
-        arg: replyArg
+        data: replyArg
       }];
       if (isRenderer) {
         ipc.send(...replyArgs);
@@ -43,20 +43,20 @@ const on = (channel, callback) => {
  * @example
  * ukogi.send("my-channel", { flag: true }, (event, arg) => console.log(arg)); // -> 42
  */
-const send = (channel, arg, callback) => {
+const send = (channel, data, callback) => {
   const id = uuid();
   if (attached.indexOf(channel) === -1) {
     ipc.on(channel + REPLY_CHANNEL_SUFFIX, (e, arg) => {
       const listener = listeners[arg._transactionUUID];
       if (listener) {
-        listener(e, arg.arg);
+        listener(e, arg.data);
         delete listeners[arg._transactionUUID];
       }
     });
     attached.push(channel);
   }
 
-  const sendArgs = [channel, { _transactionUUID: id, arg }];
+  const sendArgs = [channel, { _transactionUUID: id, data }];
   if (isRenderer) {
     ipc.send(...sendArgs);
   } else {
